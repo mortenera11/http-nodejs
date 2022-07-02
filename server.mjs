@@ -1,7 +1,5 @@
-var http = require('http');
-var fs = require('fs');
-require('dotenv').config();
-
+import createServer from 'http'
+import readFile from 'fs'
 
 fs.readFile('./index.html', function (err, html) {
     if (err) {
