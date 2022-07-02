@@ -1,11 +1,11 @@
 import createServer from 'http'
 import readFile from 'fs'
 
-fs.readFile('./index.html', function (err, html) {
+readFile('./index.html', function (err, html) {
     if (err) {
         throw err; 
     }       
-    http.createServer(function(request, response) {  
+    createServer(function(request, response) {  
         response.writeHeader(200, {"Content-Type": "text/html"});  
         response.write(html);  
         response.end();  
