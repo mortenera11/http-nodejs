@@ -1,12 +1,14 @@
-import { createServer } from 'http';
+var http = require('http'),
+    fs = require('fs');
 
-const fs = require('fs').promises;
-createServer( async (req, res) => {
-  res.write( await loadFile() );
-  res.end();
-}).listen(process.env.PORT);
 
-async function loadFile() {
-    const data = await fs.readFile("index.html", "binary");
-    return Buffer.from(data);
-}
+fs.readFile('./index.html', function (err, html) {
+    if (err) {
+        throw err; 
+    }       
+    http.createServer(function(request, response) {  
+        response.writeHeader(200, {"Content-Type": "text/html"});  
+        response.write(html);  
+        response.end();  
+    }).listen(process.env.PORT);
+});
